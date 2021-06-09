@@ -1,0 +1,9 @@
+.payment-main-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #306B68;
+}
+.payment-cotainer-1{
+    width: 60%;
+}

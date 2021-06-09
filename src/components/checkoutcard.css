@@ -1,0 +1,8 @@
+.checkout-card-container{
+    width: 400px;
+    display: flex;    
+    align-items: center;
+   
+border:1px solid gray
+    
+}

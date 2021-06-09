@@ -1,0 +1,11 @@
+.item-button{
+    background-color: #00d025;
+    border-radius: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
+    cursor: pointer;
+}
+
+.item-button:hover{
+    background-color: #01B600;
+}

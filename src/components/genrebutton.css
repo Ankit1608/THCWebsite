@@ -1,0 +1,18 @@
+.genrebutton-maincontainer-2{
+height: 50px;
+width:20vw;
+background-color: white;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+border-radius: 5px;
+  padding: 1px;
+  box-shadow: 2px 3px #f6f6f6;
+  margin: 10px;
+}
+
+.genrebutton-titlecontainer{
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+}
