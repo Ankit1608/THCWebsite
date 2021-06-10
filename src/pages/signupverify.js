@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useFormik } from "formik";
 import Auth from "@aws-amplify/auth";
+import { useLocation } from "react-router-dom";
 
 import "./login.css";
 import Navbar from "../components/Navbar";
 import Smallfooter from "../components/smallfooter";
 import cover from "../images/cover2.png";
 export default function Login({ history }) {
-  useEffect(() => {
-    checkUser();
-    async function checkUser() {
-      try {
-        const user = await Auth.currentAuthenticatedUser();
-        history.push("/");
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }, []);
+    const location = useLocation();
+    const [pass,setPass]=useState(null);
+    useEffect (() => {
+        try{
+       setPass(location.state.pass)
+        }catch(e){
+            history.replace("/")
+        }
+      },
+      []);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -25,21 +25,18 @@ export default function Login({ history }) {
     },
 
     onSubmit: async (values) => {
-      Auth.signUp({
-        username: values.email,
-        password: values.password,
-        attributes: { email: values.email },
-      })
-        .then((result) => {
-          console.log(result);
-          history.push({
-            pathname: "/signupverify",
-            state: { pass: values.password },
-          });
+        console.log(values.password)
+        Auth.confirmSignUp({email:values.email, authCode:values.password})
+        .then(async(result)=>{
+            console.log(result);
+            await Auth.signIn({email:values.email, password:pass});
+            history.push("/")
+        alert("signed in")
         })
-        .catch((e) => {
-          console.log(e);
-        });
+        .catch((e)=>{console.log(e);})
+        
+        
+         
     },
   });
 
@@ -100,27 +97,33 @@ export default function Login({ history }) {
     </>
   );
 }
+
+
+
+
+
+
+
 // import React, { useEffect, useState } from "react";
 // import { useFormik } from "formik";
 // import Auth from "@aws-amplify/auth";
+// import { useLocation } from "react-router-dom";
 
 // import "./signup.css";
 // import Navbar from "../components/Navbar";
 // import Smallfooter from "../components/smallfooter";
 // import cover from "../images/cover2.png";
-// export default function Signup({ history }) {
-//     useEffect (() => {
-//     checkUser();
-//     async function checkUser() {
-//       try {
-//         const user = await Auth.currentAuthenticatedUser();
-//        history.push("/")
-//       } catch (err) {
-//         console.log(err)
-//       }
-//     }
-//   },
-//   []);
+// export default function Signupverify({ history }) {
+    // const location = useLocation();
+    // const [pass,setPass]=useState(null);
+    // useEffect (() => {
+    //     try{
+    //    setPass(location.state.pass)
+    //     }catch(e){
+    //         history.replace("/")
+    //     }
+    //   },
+    //   []);
 //   const formik = useFormik({
 //     initialValues: {
 //       email: "",
@@ -128,31 +131,28 @@ export default function Login({ history }) {
 //     },
 
 //     onSubmit: async (values) => {
-//       try {
-//         const res = await Auth.signUp({
-//           username: values.email,
-//           password: values.password,
-//           attributes: { email: values.email },
-//         });
-//         console.log(res);
-//         history.push({pathname:"/signupverify", state:{pass:values.password}});
-//       } catch (err) {
-//         console.log({ err });
-//       }
+        // try {
+        //     await await Auth.confirmSignUp({email:values.email, authCode:values.password});
+        //     await Auth.signIn(values.email, pass);
+        //     history.push("/")
+        //     alert("signed in")
+        //   } catch (err) {
+        //     console.log({ err });
+        //   }
 //     },
 //   });
-
+ 
 //   return (
 //     <>
 //       <Navbar />
 //       <div className="contact-section" id="contact">
 //         <div className="login-content-wrapper">
-//           <div className="signup-container-1">
+//           <div className="login-container-1">
 //             <form onSubmit={formik.handleSubmit}>
 //               <div className="login-email-wrapper">
 //                 <div className="login-label-container">Email</div>{" "}
 //                 <input
-//                   id="abcd"
+//                   id="abcdefg"
 //                   type="email"
 //                   name="email"
 //                   required
@@ -163,7 +163,7 @@ export default function Login({ history }) {
 //               <div className="login-password-wrapper">
 //                 <div className="login-label-container">Password</div>
 //                 <input
-//                   id="abcd"
+//                   id="abcdefg"
 //                   type="password"
 //                   name="password"
 //                   required
