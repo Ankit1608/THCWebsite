@@ -9,7 +9,7 @@ function App() {
   return <Routes />;
 }
 
-export default withAuthenticator(App)
+export default App
 {
   /* <Homepage />
 <SearchPage />

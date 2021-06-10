@@ -1,21 +1,38 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
+import Auth from "@aws-amplify/auth";
 
 import "./login.css";
 import Navbar from "../components/Navbar";
 import Smallfooter from "../components/smallfooter";
-
 import cover from "../images/cover2.png";
 export default function Login({ history }) {
- 
+  useEffect (() => {
+    checkUser();
+    async function checkUser() {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+       history.push("/")
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  },
+  []);
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-
+  
     onSubmit: async (values) => {
-     alert(values.email, values.password)
+      Auth.signIn({username:values.email,password:values.password})
+      .then((result) => {
+      console.log(result)
+      history.replace("/")
+      }).catch((e)=>{
+        console.log(e)
+      })
     },
   });
 
@@ -32,7 +49,7 @@ export default function Login({ history }) {
                     <div className="login-label-container">Email</div>{" "}
                     <input
                       id="abcdefg"
-                      type="email"
+                      type="text"
                       name="email"
                       required
                       onChange={formik.handleChange}
@@ -58,7 +75,10 @@ export default function Login({ history }) {
                       id="loginbutton"
                     />
                   </div>
+                 
                 </form>
+                <div><button onClick={
+                  ()=>{Auth.federatedSignIn({provider:"Google"})}}>Sign in with Google</button></div>
               </div>
             </div>
           </div>

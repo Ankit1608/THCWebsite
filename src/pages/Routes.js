@@ -9,6 +9,7 @@ import ItemPage from "./itempage";
 import Payment from './payment';
 import Login from "./login";
 import Signup from "./signup";
+import Signupverify from "./signupverify";
 function PaymentPage(){
     return(
         <Router>
@@ -20,6 +21,7 @@ function PaymentPage(){
         <Route path="/payment" exact component={Payment} />
         <Route path="/signin" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
+        <Route path="/signupverify" exact component={Signupverify} />
         </Switch>
       </Router>
     )

@@ -17,7 +17,7 @@
     margin-bottom: -30px;
   }
   
-  .login-container-1 {
+  .signup-container-1 {
     color: #555;
     background-color: #eeeeef;
     border-radius: 10px;
@@ -43,7 +43,7 @@
     font-family: poppins-regular;
     margin-bottom: 45px;
   }
-  input#abcdefg {
+  input#abcd {
     background-color: #fff;
     color: #555;
     outline: none;
@@ -54,7 +54,7 @@
     padding-left: 10px;
     border-radius: 3px;
   }
-  input#abcdefg:focus {
+  input#abcd:focus {
     outline: none !important;
     border-bottom: 1px solid #306B68;
     transition: 0.3s;
