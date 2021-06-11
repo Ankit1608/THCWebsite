@@ -1,18 +1,25 @@
-.genrebutton-maincontainer-2{
-height: 50px;
-width:20vw;
-background-color: white;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-border-radius: 5px;
+.genrebutton-maincontainer-2 {
+  height: 60px;
+  width: 20vw;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 5px;
   padding: 1px;
-  box-shadow: 2px 3px #f6f6f6;
+  box-shadow: 2px 4px #eee;
   margin: 10px;
+  margin-bottom: 15px;
+  align-items: center;
 }
 
-.genrebutton-titlecontainer{
-    display: flex;
-    flex-direction: row;
-    padding-left: 10px;
+.genrebutton-maincontainer-2:hover {
+  background-color: #bedbd9;
+  transition: 0.2s ease;
+}
+.genrebutton-titlecontainer {
+  display: flex;
+  flex-direction: row;
+  padding-left: 10px;
+  align-items: center;
 }
