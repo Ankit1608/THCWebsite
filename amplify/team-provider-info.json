@@ -1,26 +1,31 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-thehomiescompany-dev-214600-authRole",
-      "UnauthRoleArn": "arn:aws:iam::070694908701:role/amplify-thehomiescompany-dev-214600-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::070694908701:role/amplify-thehomiescompany-dev-214600-authRole",
+      "AuthRoleName": "amplify-thcwebsite-dev-160249-authRole",
+      "UnauthRoleArn": "arn:aws:iam::070694908701:role/amplify-thcwebsite-dev-160249-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::070694908701:role/amplify-thcwebsite-dev-160249-authRole",
       "Region": "ap-south-1",
-      "DeploymentBucketName": "amplify-thehomiescompany-dev-214600-deployment",
-      "UnauthRoleName": "amplify-thehomiescompany-dev-214600-unauthRole",
-      "StackName": "amplify-thehomiescompany-dev-214600",
-      "StackId": "arn:aws:cloudformation:ap-south-1:070694908701:stack/amplify-thehomiescompany-dev-214600/fd4f1ae0-c93d-11eb-8d98-02f09712974a",
-      "AmplifyAppId": "d2c4fbzbpbdm32"
+      "DeploymentBucketName": "amplify-thcwebsite-dev-160249-deployment",
+      "UnauthRoleName": "amplify-thcwebsite-dev-160249-unauthRole",
+      "StackName": "amplify-thcwebsite-dev-160249",
+      "StackId": "arn:aws:cloudformation:ap-south-1:070694908701:stack/amplify-thcwebsite-dev-160249/38550660-c9d7-11eb-90df-0a1eae22bf40",
+      "AmplifyAppId": "d3kci2n4ymidi3"
     },
     "categories": {
       "auth": {
-        "thehomiescompany76c7304976c73049": {
+        "thcwebsite81c97538": {
+          "userPoolId": "ap-south-1_jnRTnnO3t",
+          "userPoolName": "thehomiescompany76c73049_userpool_76c73049-dev",
+          "webClientId": "4h7167smnv2m7fimk2dilrg88k",
+          "nativeClientId": "4e6209eimg1hd5dovoec558g0d",
+          "identityPoolId": "ap-south-1:0cc0e364-44a1-4c1a-9d16-bcf0b7ea3165",
+          "identityPoolName": "thehomiescompany76c73049_identitypool_76c73049__dev",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::070694908701:role/amplify-thehomiescompany-dev-214600-authRole",
+          "authRoleName": "amplify-thehomiescompany-dev-214600-authRole",
+          "unauthRoleArn": "arn:aws:iam::070694908701:role/amplify-thehomiescompany-dev-214600-unauthRole",
+          "unauthRoleName": "amplify-thehomiescompany-dev-214600-unauthRole",
           "googleClientId": "772578196503-u69jnlbd1t2piuc335n3bn9au98i4kf4.apps.googleusercontent.com"
-        }
-      },
-      "function": {
-        "AdminQueries28cc1aba": {
-          "deploymentBucketName": "amplify-thehomiescompany-dev-214600-deployment",
-          "s3Key": "amplify-builds/AdminQueries28cc1aba-2b794e572b3455764b42-build.zip"
         }
       }
     }

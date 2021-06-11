@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import Auth from "@aws-amplify/auth";
 import { useLocation } from "react-router-dom";
@@ -8,16 +8,15 @@ import Navbar from "../components/Navbar";
 import Smallfooter from "../components/smallfooter";
 import cover from "../images/cover2.png";
 export default function Login({ history }) {
-    const location = useLocation();
-    const [pass,setPass]=useState(null);
-    useEffect (() => {
-        try{
-       setPass(location.state.pass)
-        }catch(e){
-            history.replace("/")
-        }
-      },
-      []);
+  const location = useLocation();
+  const [pass, setPass] = useState(null);
+  useEffect(() => {
+    try {
+      setPass(location.state.pass);
+    } catch (e) {
+      history.replace("/");
+    }
+  }, []);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -25,18 +24,20 @@ export default function Login({ history }) {
     },
 
     onSubmit: async (values) => {
-        console.log(values.password)
-        Auth.confirmSignUp({email:values.email, authCode:values.password})
-        .then(async(result)=>{
-            console.log(result);
-            await Auth.signIn({email:values.email, password:pass});
-            history.push("/")
-        alert("signed in")
+      console.log(values.password);
+
+      const otp = values.password.toString();
+      console.log(otp);
+      Auth.confirmSignUp(values.email, otp)
+        .then(async (result) => {
+          console.log(result);
+          await Auth.signIn({ username: values.email, password: pass });
+          history.push("/");
+          alert("signed in");
         })
-        .catch((e)=>{console.log(e);})
-        
-        
-         
+        .catch((e) => {
+          console.log(e);
+        });
     },
   });
 
@@ -59,7 +60,7 @@ export default function Login({ history }) {
                 />
               </div>
               <div className="login-password-wrapper">
-                <div className="login-label-container">Password</div>
+                <div className="login-label-container">OTP</div>
                 <input
                   id="abcdefg"
                   type="password"
@@ -73,12 +74,11 @@ export default function Login({ history }) {
                 <input
                   type="submit"
                   name="Signin"
-                  value="Signup"
+                  value="Verify"
                   id="loginbutton"
                 />
               </div>
             </form>
-           
           </div>
         </div>
       </div>
@@ -98,12 +98,6 @@ export default function Login({ history }) {
   );
 }
 
-
-
-
-
-
-
 // import React, { useEffect, useState } from "react";
 // import { useFormik } from "formik";
 // import Auth from "@aws-amplify/auth";
@@ -114,16 +108,16 @@ export default function Login({ history }) {
 // import Smallfooter from "../components/smallfooter";
 // import cover from "../images/cover2.png";
 // export default function Signupverify({ history }) {
-    // const location = useLocation();
-    // const [pass,setPass]=useState(null);
-    // useEffect (() => {
-    //     try{
-    //    setPass(location.state.pass)
-    //     }catch(e){
-    //         history.replace("/")
-    //     }
-    //   },
-    //   []);
+// const location = useLocation();
+// const [pass,setPass]=useState(null);
+// useEffect (() => {
+//     try{
+//    setPass(location.state.pass)
+//     }catch(e){
+//         history.replace("/")
+//     }
+//   },
+//   []);
 //   const formik = useFormik({
 //     initialValues: {
 //       email: "",
@@ -131,17 +125,17 @@ export default function Login({ history }) {
 //     },
 
 //     onSubmit: async (values) => {
-        // try {
-        //     await await Auth.confirmSignUp({email:values.email, authCode:values.password});
-        //     await Auth.signIn(values.email, pass);
-        //     history.push("/")
-        //     alert("signed in")
-        //   } catch (err) {
-        //     console.log({ err });
-        //   }
+// try {
+//     await await Auth.confirmSignUp({email:values.email, authCode:values.password});
+//     await Auth.signIn(values.email, pass);
+//     history.push("/")
+//     alert("signed in")
+//   } catch (err) {
+//     console.log({ err });
+//   }
 //     },
 //   });
- 
+
 //   return (
 //     <>
 //       <Navbar />

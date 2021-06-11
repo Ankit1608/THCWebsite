@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import Auth from "@aws-amplify/auth";
 
@@ -6,8 +6,8 @@ import "./login.css";
 import Navbar from "../components/Navbar";
 import Smallfooter from "../components/smallfooter";
 import cover from "../images/cover2.png";
-import { Link } from "react-router-dom";
-export default function Login({ history }) {
+export default function ForgotPassword({ history }) {
+  const [uistate, setUistate] = useState(false);
   useEffect(() => {
     checkUser();
     async function checkUser() {
@@ -23,17 +23,29 @@ export default function Login({ history }) {
     initialValues: {
       email: "",
       password: "",
+      new_password: "",
     },
 
     onSubmit: async (values) => {
-      Auth.signIn({ username: values.email, password: values.password })
-        .then((result) => {
-          console.log(result);
-          history.replace("/");
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      if (values.password === "") {
+        Auth.forgotPassword(values.email)
+          .then((data) => {
+            console.log(data);
+            setUistate(true);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        Auth.forgotPasswordSubmit(
+          values.email,
+          values.password,
+          values.new_password
+        )
+          .then((data) => {
+            console.log(data);
+            history.replace("/signin");
+          })
+          .catch((err) => console.log(err));
+      }
     },
   });
 
@@ -55,20 +67,32 @@ export default function Login({ history }) {
                   value={formik.values.email}
                 />
               </div>
-              <div className="login-password-wrapper">
-                <div className="login-label-container">Password</div>
-                <input
-                  id="abcdefg"
-                  type="password"
-                  name="password"
-                  required
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                />
-              </div>
-              <Link to="/forgotpassword">
-                <div>Forgot Password?</div>
-              </Link>
+              {uistate && (
+                <>
+                  <div className="login-password-wrapper">
+                    <div className="login-label-container">OTP</div>
+                    <input
+                      id="abcdefg"
+                      type="password"
+                      name="password"
+                      required
+                      onChange={formik.handleChange}
+                      value={formik.values.password}
+                    />
+                  </div>
+                  <div className="login-password-wrapper">
+                    <div className="login-label-container">New Password</div>
+                    <input
+                      id="abcdefg"
+                      type="password"
+                      name="new_password"
+                      required
+                      onChange={formik.handleChange}
+                      value={formik.values.new_password}
+                    />
+                  </div>
+                </>
+              )}
               <div>
                 <input
                   type="submit"
@@ -78,15 +102,6 @@ export default function Login({ history }) {
                 />
               </div>
             </form>
-            <div>
-              <button
-                onClick={() => {
-                  Auth.federatedSignIn({ provider: "Google" });
-                }}
-              >
-                Sign in with Google
-              </button>
-            </div>
           </div>
         </div>
       </div>
